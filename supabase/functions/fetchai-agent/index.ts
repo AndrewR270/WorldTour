@@ -212,15 +212,7 @@ serve(async (req) => {
 
     const imageUrl = await imagePromise;
 
-    if (responseContent) {
-      return new Response(
-        JSON.stringify({ content: responseContent, imageUrl, source: "fetchai" }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    // Fallback: if agent didn't respond, use Lovable AI
-    console.log("Agent did not respond in time, falling back to Lovable AI...");
+    // Use Lovable AI for the response content
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("No fallback AI available");
 
