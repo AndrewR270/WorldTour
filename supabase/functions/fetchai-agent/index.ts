@@ -1,7 +1,15 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import * as secp from "npm:@noble/secp256k1@2.1.0";
 import { sha256 } from "npm:@noble/hashes@1.4.0/sha256";
+import { hmac } from "npm:@noble/hashes@1.4.0/hmac";
 import { bech32 } from "npm:bech32@2.0.0";
+
+// Required setup for @noble/secp256k1 v2
+secp.etc.hmacSha256Sync = (k: Uint8Array, ...m: Uint8Array[]) => {
+  const h = hmac.create(sha256, k);
+  for (const msg of m) h.update(msg);
+  return h.digest();
+};
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
