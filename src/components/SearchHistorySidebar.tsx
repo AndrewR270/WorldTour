@@ -52,7 +52,7 @@ const SearchHistorySidebar = ({
               {history.length > 0 && (
                 <button
                   onClick={onClear}
-                  className="text-[11px] text-muted-foreground hover:text-destructive font-body transition-colors"
+                  className="text-[11px] text-blue-600 hover:text-blue-700 font-body transition-colors"
                 >
                   Clear all
                 </button>
