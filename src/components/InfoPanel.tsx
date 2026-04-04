@@ -269,8 +269,8 @@ const InfoPanel = ({
                 <RichContent text={activeContent} />
               </motion.div>
             ) : content ? (
-              <div className="flex flex-col items-center justify-center h-full gap-3 text-muted-foreground text-sm px-6">
-                <activeTabMeta.icon className="w-8 h-8 text-muted-foreground/30" />
+              <div className="flex flex-col items-center justify-center h-full gap-3 text-gray-500 text-sm px-6">
+                <activeTabMeta.icon className="w-8 h-8 text-gray-300" />
                 <p className="text-center">
                   No {activeTabMeta.label.toLowerCase()} information available for this location.
                 </p>
