@@ -3,7 +3,7 @@ import {
   BookOpen, Newspaper, AlertTriangle, ChevronRight, ImageOff,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useMemo, Fragment } from "react";
+import { useState, useMemo, useEffect, Fragment } from "react";
 
 interface InfoPanelProps {
   isOpen: boolean;
@@ -144,6 +144,10 @@ const InfoPanel = ({
 }: InfoPanelProps) => {
   const [activeTab, setActiveTab] = useState("history");
   const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    setImgError(false);
+  }, [imageUrl]);
 
   const sections = useMemo(() => (content ? parseSections(content) : {}), [content]);
   const activeContent = sections[activeTab];
