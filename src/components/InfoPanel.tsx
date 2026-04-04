@@ -82,7 +82,7 @@ function RichLine({ text }: { text: string }) {
     <>
       {parts.map((part, i) =>
         part.startsWith("**") && part.endsWith("**") ? (
-          <strong key={i} className="text-foreground font-semibold">
+          <strong key={i} className="text-gray-900 font-semibold">
             {part.slice(2, -2)}
           </strong>
         ) : (
@@ -104,7 +104,7 @@ function RichContent({ text }: { text: string }) {
     elements.push(
       <ul key={`ul-${elements.length}`} className="space-y-1.5 my-2">
         {bulletBuffer.map((b, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-foreground/80 leading-relaxed">
+          <li key={i} className="flex items-start gap-2 text-sm text-gray-800 leading-relaxed">
             <ChevronRight className="w-3.5 h-3.5 mt-1 shrink-0 text-primary/70" />
             <span><RichLine text={b} /></span>
           </li>
@@ -121,7 +121,7 @@ function RichContent({ text }: { text: string }) {
     } else {
       flushBullets();
       elements.push(
-        <p key={`p-${elements.length}`} className="text-sm text-foreground/80 leading-relaxed">
+        <p key={`p-${elements.length}`} className="text-sm text-gray-800 leading-relaxed">
           <RichLine text={line} />
         </p>
       );
@@ -157,7 +157,7 @@ const InfoPanel = ({
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: "100%", opacity: 0 }}
           transition={{ type: "spring", damping: 28, stiffness: 220 }}
-          className="fixed top-0 right-0 h-full w-full max-w-[var(--panel-width)] bg-card/98 backdrop-blur-2xl border-l border-border z-[1000] flex flex-col shadow-2xl"
+          className="fixed top-0 right-0 h-full w-full max-w-[var(--panel-width)] bg-white backdrop-blur-2xl border-l border-gray-200 z-[1000] flex flex-col shadow-2xl"
         >
           {/* ─── Hero Image ─── */}
           <div className="relative w-full h-48 shrink-0 overflow-hidden bg-muted">
@@ -203,7 +203,7 @@ const InfoPanel = ({
           </div>
 
           {/* ─── Tabs ─── */}
-          <div className="flex gap-1.5 px-4 py-3 overflow-x-auto border-b border-border/60 scrollbar-none shrink-0">
+          <div className="flex gap-1.5 px-4 py-3 overflow-x-auto border-b border-gray-200 scrollbar-none shrink-0">
             {tabs.map(({ key, icon: Icon, label }) => {
               const isActive = activeTab === key;
               return (
@@ -213,7 +213,7 @@ const InfoPanel = ({
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-body font-medium whitespace-nowrap transition-all duration-200 ${
                     isActive
                       ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105"
-                      : "bg-secondary text-foreground/70 hover:bg-secondary/80 hover:text-foreground"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -233,10 +233,10 @@ const InfoPanel = ({
                   </div>
                 </div>
                 <div className="text-center">
-                  <p className="text-foreground font-body text-sm font-medium">
+                  <p className="text-gray-800 font-body text-sm font-medium">
                     Exploring this place…
                   </p>
-                  <p className="text-muted-foreground font-body text-xs mt-1">
+                  <p className="text-gray-500 font-body text-xs mt-1">
                     Gathering history, culture & stories
                   </p>
                 </div>
@@ -250,16 +250,16 @@ const InfoPanel = ({
                 className="p-5"
               >
                 {/* Section header card */}
-                <div className={`rounded-xl bg-gradient-to-r ${activeTabMeta.color} border border-border/40 p-4 mb-4`}>
+                <div className={`rounded-xl bg-gradient-to-r ${activeTabMeta.color} border border-gray-200 p-4 mb-4`}>
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-lg bg-card/80 flex items-center justify-center">
                       <activeTabMeta.icon className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-display text-base font-bold text-foreground">
+                      <h3 className="font-display text-base font-bold text-gray-900">
                         {activeTabMeta.label}
                       </h3>
-                      <p className="text-[11px] text-muted-foreground font-body">
+                      <p className="text-[11px] text-gray-500 font-body">
                         {locationName}
                       </p>
                     </div>
@@ -269,22 +269,22 @@ const InfoPanel = ({
                 <RichContent text={activeContent} />
               </motion.div>
             ) : content ? (
-              <div className="flex flex-col items-center justify-center h-full gap-3 text-muted-foreground text-sm px-6">
-                <activeTabMeta.icon className="w-8 h-8 text-muted-foreground/30" />
+              <div className="flex flex-col items-center justify-center h-full gap-3 text-gray-500 text-sm px-6">
+                <activeTabMeta.icon className="w-8 h-8 text-gray-300" />
                 <p className="text-center">
                   No {activeTabMeta.label.toLowerCase()} information available for this location.
                 </p>
               </div>
             ) : (
-              <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+              <div className="flex items-center justify-center h-full text-gray-500 text-sm">
                 Click anywhere on the map to explore
               </div>
             )}
           </div>
 
           {/* ─── Footer ─── */}
-          <div className="px-5 py-3 border-t border-border/60 shrink-0">
-            <p className="text-[11px] text-muted-foreground/70 font-body text-center">
+          <div className="px-5 py-3 border-t border-gray-200 shrink-0">
+            <p className="text-[11px] text-gray-400 font-body text-center">
               Powered by AI · Images via Wikipedia
             </p>
           </div>
