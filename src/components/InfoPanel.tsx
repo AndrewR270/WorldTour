@@ -82,7 +82,7 @@ function RichLine({ text }: { text: string }) {
     <>
       {parts.map((part, i) =>
         part.startsWith("**") && part.endsWith("**") ? (
-          <strong key={i} className="text-foreground font-semibold">
+          <strong key={i} className="text-gray-900 font-semibold">
             {part.slice(2, -2)}
           </strong>
         ) : (
