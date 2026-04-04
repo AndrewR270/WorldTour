@@ -233,7 +233,7 @@ const InfoPanel = ({
                   </div>
                 </div>
                 <div className="text-center">
-                  <p className="text-foreground font-body text-sm font-medium">
+                  <p className="text-gray-800 font-body text-sm font-medium">
                     Exploring this place…
                   </p>
                   <p className="text-muted-foreground font-body text-xs mt-1">
