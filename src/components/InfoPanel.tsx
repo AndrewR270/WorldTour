@@ -104,7 +104,7 @@ function RichContent({ text }: { text: string }) {
     elements.push(
       <ul key={`ul-${elements.length}`} className="space-y-1.5 my-2">
         {bulletBuffer.map((b, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-secondary-foreground leading-relaxed">
+          <li key={i} className="flex items-start gap-2 text-sm text-foreground/80 leading-relaxed">
             <ChevronRight className="w-3.5 h-3.5 mt-1 shrink-0 text-primary/70" />
             <span><RichLine text={b} /></span>
           </li>
@@ -121,7 +121,7 @@ function RichContent({ text }: { text: string }) {
     } else {
       flushBullets();
       elements.push(
-        <p key={`p-${elements.length}`} className="text-sm text-secondary-foreground leading-relaxed">
+        <p key={`p-${elements.length}`} className="text-sm text-foreground/80 leading-relaxed">
           <RichLine text={line} />
         </p>
       );
@@ -213,7 +213,7 @@ const InfoPanel = ({
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-body font-medium whitespace-nowrap transition-all duration-200 ${
                     isActive
                       ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105"
-                      : "bg-secondary/60 text-muted-foreground hover:bg-secondary hover:text-secondary-foreground"
+                      : "bg-secondary text-foreground/70 hover:bg-secondary/80 hover:text-foreground"
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
