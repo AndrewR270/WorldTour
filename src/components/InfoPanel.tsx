@@ -213,7 +213,7 @@ const InfoPanel = ({
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-body font-medium whitespace-nowrap transition-all duration-200 ${
                     isActive
                       ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105"
-                      : "bg-secondary text-foreground/70 hover:bg-secondary/80 hover:text-foreground"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
