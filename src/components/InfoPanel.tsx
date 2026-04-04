@@ -250,7 +250,7 @@ const InfoPanel = ({
                 className="p-5"
               >
                 {/* Section header card */}
-                <div className={`rounded-xl bg-gradient-to-r ${activeTabMeta.color} border border-border/40 p-4 mb-4`}>
+                <div className={`rounded-xl bg-gradient-to-r ${activeTabMeta.color} border border-gray-200 p-4 mb-4`}>
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-lg bg-card/80 flex items-center justify-center">
                       <activeTabMeta.icon className="w-4 h-4 text-primary" />
