@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => ({
       "react/jsx-dev-runtime",
       "@tanstack/react-query",
       "@tanstack/query-core",
+      "@radix-ui/react-tooltip",
     ],
   },
   optimizeDeps: {
