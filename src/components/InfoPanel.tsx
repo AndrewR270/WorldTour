@@ -236,7 +236,7 @@ const InfoPanel = ({
                   <p className="text-gray-800 font-body text-sm font-medium">
                     Exploring this place…
                   </p>
-                  <p className="text-muted-foreground font-body text-xs mt-1">
+                  <p className="text-gray-500 font-body text-xs mt-1">
                     Gathering history, culture & stories
                   </p>
                 </div>
