@@ -259,7 +259,7 @@ const InfoPanel = ({
                       <h3 className="font-display text-base font-bold text-gray-900">
                         {activeTabMeta.label}
                       </h3>
-                      <p className="text-[11px] text-muted-foreground font-body">
+                      <p className="text-[11px] text-gray-500 font-body">
                         {locationName}
                       </p>
                     </div>
