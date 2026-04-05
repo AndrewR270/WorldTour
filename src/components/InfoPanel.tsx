@@ -14,6 +14,7 @@ interface InfoPanelProps {
   lat: number | null;
   lng: number | null;
   exploreContext: string | null;
+  hasTopicBelow?: boolean;
 }
 
 const tabs = [
