@@ -1,24 +1,14 @@
 
 
-# Colored Map Tiles
+## Plan: Expandable Explore Location Descriptions
 
-Currently using CARTO Light (grayscale) tiles. I'll switch to a colorful tile provider.
+**What**: Make explore result items expandable — clicking a location toggles its full description instead of truncating it. Clicking still also triggers the map pan/info panel.
 
-## Options
+**Changes in `src/components/ExploreSidebar.tsx`**:
+1. Add `expandedIndex` state (`number | null`)
+2. On click of a result item, toggle `expandedIndex` (expand/collapse) AND call `onSelect`
+3. When expanded, remove `line-clamp-2` from the description so the full text is visible
+4. Add a subtle visual indicator (e.g. slight background highlight) for the expanded item
 
-| Provider | Style | URL |
-|----------|-------|-----|
-| **OpenStreetMap Standard** | Classic colorful | `https://tile.openstreetmap.org/{z}/{x}/{y}.png` |
-| **CARTO Voyager** | Colorful + clean/modern | `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png` |
-| **Stadia Alidade Smooth** | Soft pastel colors | Requires API key |
-
-## Plan
-
-**File: `src/components/MapView.tsx`**
-- Replace the CARTO Light tile URL with **CARTO Voyager** — it's colorful, modern, clean, and free (no API key needed)
-
-**File: `src/index.css`**
-- Remove or adjust the `filter: brightness/contrast/saturate` on `.leaflet-tile-pane` since Voyager tiles already look great without manipulation
-
-One file change, instant result.
+Single file change, minimal complexity.
 
