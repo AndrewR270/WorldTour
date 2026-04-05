@@ -51,6 +51,7 @@ const ExploreSidebar = forwardRef<ExploreSidebarHandle, ExploreSidebarProps>(({ 
     const trimmed = searchQuery.trim();
     if (!trimmed) return;
 
+    onSearch?.(trimmed);
     setIsLoading(true);
     setResults([]);
     setExpandedIndex(null);
