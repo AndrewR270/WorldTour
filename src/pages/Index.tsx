@@ -312,14 +312,17 @@ const Index = () => {
                 <X className="w-4 h-4" />
               </button>
               <h2 className="font-display text-xl font-bold text-foreground mb-4">
-                Your Travel Companion
+                What Is WorldTour?
               </h2>
               <div className="space-y-3 text-sm font-body text-foreground/85 leading-relaxed">
                 <p>
-                  <strong className="text-primary">🗺 Tap the map:</strong> Click anywhere to uncover the history, culture, food, and stories of any place on Earth.
+                  <strong className="text-primary">📖 How WorldTour Works:</strong> Explore and learn about the world through your own unique lens. Pick a random location, one you know, or places associated with your favorite topics. Each location is explored through History, Food, Culture, Stories, News, and Issues tabs, with connections to your search topic.
                 </p>
                 <p>
-                  <strong className="text-primary">🔍 Search:</strong> Type anything, from "ancient temples" to "best street food", and discover matching destinations worldwide.
+                  <strong className="text-primary">🗺 Tap the map:</strong> Click anywhere to uncover the history, culture, food, and stories of any place on Earth. Learn about new and unexpected destinations.
+                </p>
+                <p>
+                  <strong className="text-primary">🔍 Search:</strong> Enter any topic, person, or event, and learn about connected locations in the world. See stories through geography.
                 </p>
                 <p>
                   <strong className="text-primary">📑 Explore tab:</strong> Browse search results with descriptions. Click any destination to fly there and see how it connects to your search.
@@ -333,12 +336,9 @@ const Index = () => {
                 <p>
                   <strong className="text-primary">🌍 Reset view:</strong> Zoom out to see the full world map again.
                 </p>
-                <p>
-                  <strong className="text-primary">📖 Six perspectives:</strong> Each location is explored through History, Food, Culture, Stories, News, and Issues tabs.
-                </p>
               </div>
               <p className="mt-4 text-xs font-body italic text-muted-foreground text-center">
-                A traveller's journal.
+                By Andrew Rafal and Archith Erigineni.
               </p>
             </motion.div>
           </motion.div>
