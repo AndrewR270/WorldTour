@@ -399,6 +399,7 @@ const Index = () => {
         lat={lat}
         lng={lng}
         exploreContext={exploreContext}
+        hasTopicBelow={topicPanelOpen}
       />
     </div>
   );
