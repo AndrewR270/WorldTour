@@ -80,7 +80,7 @@ RULES:
 - Bullet points (- ) for lists
 - 40-80 words per section
 - Vivid, conversational, like a knowledgeable local guide
-- If remote/ocean, discuss nearest significant cultural region`;
+- CRITICAL: If the given location is remote, uninhabited, in the ocean, a desert, or otherwise lacks cultural significance, you MUST identify the nearest notable town or city and write about THAT place instead. Start your response with a single line: "Nearest town: [Town Name, Country]" so we know which place you chose. Only include this line if you had to redirect to a different location.`;
 
     // Fire ALL requests in parallel: main content, wikipedia image, and explore context
     const promises: Record<string, Promise<any>> = {
