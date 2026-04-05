@@ -110,7 +110,40 @@ FORMATTING RULES:
     const content = data.choices?.[0]?.message?.content || "No information available.";
     const imageUrl = await imagePromise;
 
-    return new Response(JSON.stringify({ content, imageUrl }), {
+    // Generate explore context if a search query was provided
+    let exploreContext: string | null = null;
+    if (searchQuery && searchQuery.trim()) {
+      try {
+        const ctxResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${LOVABLE_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "google/gemini-2.5-flash-lite",
+            messages: [
+              {
+                role: "system",
+                content: "Write a single concise paragraph (2-3 sentences, max 60 words) explaining how a location relates to a search topic. Be specific and vivid. No headers or bullet points.",
+              },
+              {
+                role: "user",
+                content: `How does "${locationName}" relate to the topic "${searchQuery}"?`,
+              },
+            ],
+          }),
+        });
+        if (ctxResponse.ok) {
+          const ctxData = await ctxResponse.json();
+          exploreContext = ctxData.choices?.[0]?.message?.content?.trim() || null;
+        }
+      } catch (e) {
+        console.error("Explore context error:", e);
+      }
+    }
+
+    return new Response(JSON.stringify({ content, imageUrl, exploreContext }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (e) {
