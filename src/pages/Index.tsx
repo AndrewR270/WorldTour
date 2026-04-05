@@ -350,7 +350,6 @@ const Index = () => {
               <h2 className="font-display text-xl font-bold text-foreground mb-4">
                 What Is WorldTour?
               </h2>
-              <div className="space-y-3 text-sm font-body text-foreground/85 leading-relaxed">
                 <p>
                   <strong className="text-primary">📖 Our Mission:</strong> Explore and learn about the world through your own unique lens. Journey to anywhere on the map, or discover places associated with any topic you can dream of. This is the story of our world, visualized.
                 </p>
@@ -359,6 +358,9 @@ const Index = () => {
                 </p>
                 <p>
                   <strong className="text-primary">🔍 Search:</strong> Enter any (yes any) topic. See stories come alive through geography as WorldTour finds locations associated with your query.
+                </p>
+                <p>
+                  <strong className="text-primary">🔗 Clickable keywords:</strong> Bolded words in descriptions are clickable! Click any highlighted term to instantly search and explore it further.
                 </p>
                 <p>
                   <strong className="text-primary">📑 Explore tab:</strong> Browse through a list of locations relevant to your query. Click any destination to fly there and see how it connects to your search!
@@ -372,7 +374,9 @@ const Index = () => {
                 <p>
                   <strong className="text-primary">🌍 Reset view:</strong> Zoom out to see the full world map again.
                 </p>
-              </div>
+                <p>
+                  <strong className="text-primary">📚 Sources:</strong> Each description includes linked sources at the bottom for further reading.
+                </p>
               <p className="mt-4 text-xs font-body italic text-muted-foreground text-center">
                 Created by Andrew Rafal and Archith Erigineni.
               </p>
