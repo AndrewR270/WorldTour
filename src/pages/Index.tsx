@@ -132,6 +132,7 @@ const Index = () => {
 
       {/* Explore sidebar */}
       <ExploreSidebar
+        ref={exploreRef}
         isOpen={exploreOpen}
         onToggle={() => { setExploreOpen((o) => !o); setSidebarOpen(false); }}
         onSelect={handleExploreSelect}
