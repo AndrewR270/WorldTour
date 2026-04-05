@@ -1,5 +1,5 @@
-import { useState, useCallback } from "react";
-import { Compass } from "lucide-react";
+import { useState, useCallback, useRef } from "react";
+import { Compass, Search } from "lucide-react";
 import MapView from "@/components/MapView";
 import InfoPanel from "@/components/InfoPanel";
 import SearchHistorySidebar from "@/components/SearchHistorySidebar";
