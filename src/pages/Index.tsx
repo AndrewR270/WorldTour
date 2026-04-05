@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from "react";
-import { Compass, Search, Loader2, Dices, HelpCircle, X } from "lucide-react";
+import { Compass, Search, Loader2, Dices, HelpCircle, X, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import MapView from "@/components/MapView";
+import MapView, { MapViewHandle } from "@/components/MapView";
 import InfoPanel from "@/components/InfoPanel";
 import SearchHistorySidebar from "@/components/SearchHistorySidebar";
 import ExploreSidebar, { ExploreSidebarHandle } from "@/components/ExploreSidebar";
@@ -49,6 +49,7 @@ const Index = () => {
   const [searchFocused, setSearchFocused] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const exploreRef = useRef<ExploreSidebarHandle>(null);
+  const mapRef = useRef<MapViewHandle>(null);
 
   const { history, addEntry, clearHistory, removeEntry } = useSearchHistory();
 
@@ -159,6 +160,7 @@ const Index = () => {
   return (
     <div className="h-screen w-screen overflow-hidden relative">
       <MapView
+        ref={mapRef}
         onLocationClick={handleLocationClick}
         markers={mapMarkers}
         onMarkerClick={handleMarkerClick}
@@ -250,6 +252,14 @@ const Index = () => {
 
       {/* Bottom-left floating buttons */}
       <div className="fixed bottom-6 left-4 z-[999] flex flex-col gap-3 pointer-events-auto">
+        <button
+          onClick={() => mapRef.current?.resetView()}
+          className="w-12 h-12 rounded-full bg-card/95 border-2 border-border flex items-center justify-center hover:bg-secondary/80 transition-all hover:scale-105 active:scale-95"
+          style={{ boxShadow: "2px 2px 8px hsl(25 30% 20% / 0.2)" }}
+          title="Reset map view"
+        >
+          <Globe className="w-5 h-5 text-primary" />
+        </button>
         <button
           onClick={handleSurpriseMe}
           disabled={isSurprising}
