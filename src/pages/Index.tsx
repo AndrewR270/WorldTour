@@ -120,7 +120,7 @@ const Index = () => {
       {/* Search history sidebar */}
       <SearchHistorySidebar
         isOpen={sidebarOpen}
-        onToggle={() => setSidebarOpen((o) => !o)}
+        onToggle={() => { setSidebarOpen((o) => !o); setExploreOpen(false); }}
         history={history}
         onSelect={handleHistorySelect}
         onRemove={removeEntry}
