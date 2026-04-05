@@ -54,7 +54,7 @@ const Index = () => {
 
   const { history, addEntry, clearHistory, removeEntry } = useSearchHistory();
 
-  const handleLocationClick = useCallback(async (clickLat: number, clickLng: number) => {
+  const handleLocationClick = useCallback(async (clickLat: number, clickLng: number, searchQuery?: string) => {
     setLat(clickLat);
     setLng(clickLng);
     setPanelOpen(true);
