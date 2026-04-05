@@ -69,7 +69,7 @@ const ExploreSidebar = ({ isOpen, onToggle, onSelect, onResults }: ExploreSideba
       <button
         onClick={onToggle}
         className="fixed top-[220px] left-4 z-[1001] w-10 h-10 rounded-xl bg-card/80 backdrop-blur-lg border border-border flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-card transition-all"
-        style={{ left: isOpen ? "calc(280px + 1rem)" : "1rem" }}
+        style={{ left: isOpen ? "calc(320px + 1rem)" : "1rem" }}
       >
         {isOpen ? <ChevronLeft className="w-5 h-5" /> : <HelpCircle className="w-5 h-5" />}
       </button>
@@ -78,11 +78,11 @@ const ExploreSidebar = ({ isOpen, onToggle, onSelect, onResults }: ExploreSideba
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ x: -280, opacity: 0 }}
+            initial={{ x: -320, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -280, opacity: 0 }}
+            exit={{ x: -320, opacity: 0 }}
             transition={{ type: "spring", damping: 28, stiffness: 260 }}
-            className="fixed top-0 left-0 h-full w-[280px] bg-card/95 backdrop-blur-2xl border-r border-border z-[1000] flex flex-col shadow-2xl"
+            className="fixed top-0 left-0 h-full w-[320px] bg-card/95 backdrop-blur-2xl border-r border-border z-[1000] flex flex-col shadow-2xl"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-4 border-b border-border shrink-0">
@@ -127,7 +127,14 @@ const ExploreSidebar = ({ isOpen, onToggle, onSelect, onResults }: ExploreSideba
 
             {/* Results */}
             <div className="flex-1 overflow-y-auto">
-              {results.length === 0 && !isLoading ? (
+              {isLoading ? (
+                <div className="flex flex-col items-center justify-center h-full gap-3 px-6 text-center">
+                  <Loader2 className="w-8 h-8 text-primary animate-spin" />
+                  <p className="text-xs text-muted-foreground font-body">
+                    Finding locations...
+                  </p>
+                </div>
+              ) : results.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full gap-3 px-6 text-center">
                   <Search className="w-8 h-8 text-muted-foreground/30" />
                   <p className="text-xs text-muted-foreground font-body">
