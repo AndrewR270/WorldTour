@@ -316,29 +316,29 @@ const Index = () => {
               </h2>
               <div className="space-y-3 text-sm font-body text-foreground/85 leading-relaxed">
                 <p>
-                  <strong className="text-primary">📖 How WorldTour Works:</strong> Explore and learn about the world through your own unique lens. Pick a random location, one you know, or places associated with your favorite topics. Each location is explored through History, Food, Culture, Stories, News, and Issues tabs, with connections to your search topic.
+                  <strong className="text-primary">📖 Our Mission:</strong> Explore and learn about the world through your own unique lens. Journey to anywhere on the map, or discover places associated with any topic you can dream of. This is the story of our world, visualized.
                 </p>
                 <p>
-                  <strong className="text-primary">🗺 Tap the map:</strong> Click anywhere to uncover the history, culture, food, and stories of any place on Earth. Learn about new and unexpected destinations.
+                  <strong className="text-primary">🗺 Tap the map:</strong> Click anywhere on the map. Discover History, Food, Culture, Stories, News, and Issues associated with this place on earth. Perfect for studying specific locations and learning local lore.
                 </p>
                 <p>
-                  <strong className="text-primary">🔍 Search:</strong> Enter any topic, person, or event, and learn about connected locations in the world. See stories through geography.
+                  <strong className="text-primary">🔍 Search:</strong> Enter any (yes any) topic. See stories come alive through geography as WorldTour finds locations associated with your query.
                 </p>
                 <p>
-                  <strong className="text-primary">📑 Explore tab:</strong> Browse search results with descriptions. Click any destination to fly there and see how it connects to your search.
+                  <strong className="text-primary">📑 Explore tab:</strong> Browse through a list of locations relevant to your query. Click any destination to fly there and see how it connects to your search!
                 </p>
                 <p>
                   <strong className="text-primary">📗 History tab:</strong> Your personal journey log. Revisit any place you've explored before.
                 </p>
                 <p>
-                  <strong className="text-primary">🎲 Surprise Me:</strong> Roll the dice and get whisked away to a random fascinating destination.
+                  <strong className="text-primary">🎲 Surprise Me:</strong> Roll the dice! Get whisked away to a random, fascinating destination.
                 </p>
                 <p>
                   <strong className="text-primary">🌍 Reset view:</strong> Zoom out to see the full world map again.
                 </p>
               </div>
               <p className="mt-4 text-xs font-body italic text-muted-foreground text-center">
-                By Andrew Rafal and Archith Erigineni.
+                Created by Andrew Rafal and Archith Erigineni.
               </p>
             </motion.div>
           </motion.div>
