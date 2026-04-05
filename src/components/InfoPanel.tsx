@@ -13,6 +13,7 @@ interface InfoPanelProps {
   isLoading: boolean;
   lat: number | null;
   lng: number | null;
+  exploreContext: string | null;
 }
 
 const tabs = [
