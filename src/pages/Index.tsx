@@ -401,6 +401,7 @@ const Index = () => {
         content={topicContent}
         isLoading={topicLoading}
         hasLocationAbove={panelOpen}
+        onBoldClick={handleBoldClick}
       />
 
       <InfoPanel
@@ -413,6 +414,7 @@ const Index = () => {
         lng={lng}
         exploreContext={exploreContext}
         hasTopicBelow={topicPanelOpen}
+        onBoldClick={handleBoldClick}
       />
     </div>
   );
