@@ -234,7 +234,7 @@ const Index = () => {
               onChange={(e) => setTopSearchQuery(e.target.value)}
               onFocus={() => setSearchFocused(true)}
               onBlur={() => setSearchFocused(false)}
-              placeholder="Search for anything to learn and visualize it"
+              placeholder="Search for anything in the world - see it on the map."
               className="w-full h-10 pl-4 pr-10 rounded bg-card/90 border-2 border-border text-sm font-body text-foreground placeholder:text-muted-foreground/60 placeholder:italic focus:outline-none focus:border-primary/60 backdrop-blur-sm transition-all duration-300"
               style={{
                 boxShadow: searchFocused
