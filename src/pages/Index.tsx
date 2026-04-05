@@ -160,6 +160,7 @@ const Index = () => {
   return (
     <div className="h-screen w-screen overflow-hidden relative">
       <MapView
+        ref={mapRef}
         onLocationClick={handleLocationClick}
         markers={mapMarkers}
         onMarkerClick={handleMarkerClick}
