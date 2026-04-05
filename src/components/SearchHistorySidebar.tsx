@@ -5,6 +5,7 @@ import { formatDistanceToNow } from "date-fns";
 
 interface SearchHistorySidebarProps {
   isOpen: boolean;
+  hidden?: boolean;
   onToggle: () => void;
   history: SearchHistoryEntry[];
   onSelect: (entry: SearchHistoryEntry) => void;
