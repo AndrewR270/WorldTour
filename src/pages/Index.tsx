@@ -114,6 +114,7 @@ const Index = () => {
       if (error) throw error;
       setContent(data.content);
       setImageUrl(data.imageUrl || null);
+      setExploreContext(data.exploreContext || null);
       if (data.source) {
         console.log(`[CultureMap] Response source: ${data.source}`);
       }
