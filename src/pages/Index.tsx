@@ -251,10 +251,12 @@ const Index = () => {
             const q = topSearchQuery.trim();
             if (!q) return;
             setSidebarOpen(false);
+            setPanelOpen(false);
             if (!exploreOpen) setExploreOpen(true);
             exploreRef.current?.setQueryAndSearch(q);
             setLastExploreQuery(q);
             setTopSearchQuery("");
+            fetchTopicRundown(q);
           }}
         >
           <div className="relative">
