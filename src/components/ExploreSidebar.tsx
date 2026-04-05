@@ -24,7 +24,7 @@ interface ExploreSidebarProps {
   onSearch?: (query: string) => void;
 }
 
-const ExploreSidebar = forwardRef<ExploreSidebarHandle, ExploreSidebarProps>(({ isOpen, hidden, onToggle, onSelect, onResults }, ref) => {
+const ExploreSidebar = forwardRef<ExploreSidebarHandle, ExploreSidebarProps>(({ isOpen, hidden, onToggle, onSelect, onResults, onSearch }, ref) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<ExploreLocation[]>([]);
   const [isLoading, setIsLoading] = useState(false);
