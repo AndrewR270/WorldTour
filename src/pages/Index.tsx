@@ -108,7 +108,7 @@ const Index = () => {
       addEntry(fullName, clickLat, clickLng);
 
       const { data, error } = await supabase.functions.invoke("location-culture", {
-        body: { locationName: fullName, lat: clickLat, lng: clickLng },
+        body: { locationName: fullName, lat: clickLat, lng: clickLng, searchQuery: searchQuery || undefined },
       });
 
       if (error) throw error;
