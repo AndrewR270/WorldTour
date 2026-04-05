@@ -78,6 +78,15 @@ const Index = () => {
     }
   }, []);
 
+  const handleBoldClick = useCallback((term: string) => {
+    setSidebarOpen(false);
+    setPanelOpen(false);
+    if (!exploreOpen) setExploreOpen(true);
+    exploreRef.current?.setQueryAndSearch(term);
+    setLastExploreQuery(term);
+    fetchTopicRundown(term);
+  }, [exploreOpen, fetchTopicRundown]);
+
   const { history, addEntry, clearHistory, removeEntry } = useSearchHistory();
 
   const handleLocationClick = useCallback(async (clickLat: number, clickLng: number, searchQuery?: string) => {
