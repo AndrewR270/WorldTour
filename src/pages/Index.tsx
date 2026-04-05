@@ -220,6 +220,10 @@ const Index = () => {
         onToggle={() => { setExploreOpen((o) => !o); setSidebarOpen(false); }}
         onSelect={handleExploreSelect}
         onResults={handleExploreResults}
+        onSearch={(q) => {
+          setPanelOpen(false);
+          fetchTopicRundown(q);
+        }}
       />
 
       {/* Logo */}
