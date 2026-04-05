@@ -21,6 +21,7 @@ interface ExploreSidebarProps {
   onToggle: () => void;
   onSelect: (location: ExploreLocation, searchQuery: string) => void;
   onResults: (locations: ExploreLocation[]) => void;
+  onSearch?: (query: string) => void;
 }
 
 const ExploreSidebar = forwardRef<ExploreSidebarHandle, ExploreSidebarProps>(({ isOpen, hidden, onToggle, onSelect, onResults }, ref) => {
