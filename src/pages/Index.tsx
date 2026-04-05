@@ -38,6 +38,7 @@ const Index = () => {
   const [locationName, setLocationName] = useState<string | null>(null);
   const [content, setContent] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [exploreContext, setExploreContext] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [lat, setLat] = useState<number | null>(null);
   const [lng, setLng] = useState<number | null>(null);
@@ -48,12 +49,13 @@ const Index = () => {
   const [isSurprising, setIsSurprising] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
+  const [lastExploreQuery, setLastExploreQuery] = useState("");
   const exploreRef = useRef<ExploreSidebarHandle>(null);
   const mapRef = useRef<MapViewHandle>(null);
 
   const { history, addEntry, clearHistory, removeEntry } = useSearchHistory();
 
-  const handleLocationClick = useCallback(async (clickLat: number, clickLng: number) => {
+  const handleLocationClick = useCallback(async (clickLat: number, clickLng: number, searchQuery?: string) => {
     setLat(clickLat);
     setLng(clickLng);
     setPanelOpen(true);
@@ -61,6 +63,7 @@ const Index = () => {
     setContent(null);
     setImageUrl(null);
     setLocationName(null);
+    setExploreContext(null);
 
     const fallbackLocationName = `${Math.abs(clickLat).toFixed(2)}°${clickLat >= 0 ? "N" : "S"}, ${Math.abs(clickLng).toFixed(2)}°${clickLng >= 0 ? "E" : "W"}`;
 
@@ -106,12 +109,13 @@ const Index = () => {
       addEntry(fullName, clickLat, clickLng);
 
       const { data, error } = await supabase.functions.invoke("location-culture", {
-        body: { locationName: fullName, lat: clickLat, lng: clickLng },
+        body: { locationName: fullName, lat: clickLat, lng: clickLng, searchQuery: searchQuery || undefined },
       });
 
       if (error) throw error;
       setContent(data.content);
       setImageUrl(data.imageUrl || null);
+      setExploreContext(data.exploreContext || null);
       if (data.source) {
         console.log(`[CultureMap] Response source: ${data.source}`);
       }
@@ -139,8 +143,8 @@ const Index = () => {
     setSidebarOpen(false);
   }, [handleLocationClick]);
 
-  const handleExploreSelect = useCallback((location: ExploreLocation) => {
-    handleLocationClick(location.lat, location.lng);
+  const handleExploreSelect = useCallback((location: ExploreLocation, searchQuery: string) => {
+    handleLocationClick(location.lat, location.lng, searchQuery || undefined);
   }, [handleLocationClick]);
 
   const handleExploreResults = useCallback((locations: ExploreLocation[]) => {
@@ -219,6 +223,7 @@ const Index = () => {
               setSidebarOpen(false);
               if (!exploreOpen) setExploreOpen(true);
               exploreRef.current?.setQueryAndSearch(q);
+              setLastExploreQuery(q);
               setTopSearchQuery("");
             }}
           >
@@ -345,6 +350,7 @@ const Index = () => {
         isLoading={isLoading}
         lat={lat}
         lng={lng}
+        exploreContext={exploreContext}
       />
     </div>
   );

@@ -13,6 +13,7 @@ interface InfoPanelProps {
   isLoading: boolean;
   lat: number | null;
   lng: number | null;
+  exploreContext: string | null;
 }
 
 const tabs = [
@@ -114,7 +115,7 @@ function RichContent({ text }: { text: string }) {
 }
 
 const InfoPanel = ({
-  isOpen, onClose, locationName, content, isLoading, lat, lng,
+  isOpen, onClose, locationName, content, isLoading, lat, lng, exploreContext,
 }: InfoPanelProps) => {
   const [activeTab, setActiveTab] = useState("history");
 
@@ -159,6 +160,15 @@ const InfoPanel = ({
               </button>
             </div>
           </div>
+
+          {/* Explore context */}
+          {exploreContext && (
+            <div className="px-5 py-3 border-b border-border shrink-0 bg-primary/5">
+              <p className="text-sm text-foreground/90 font-body leading-relaxed italic">
+                {exploreContext}
+              </p>
+            </div>
+          )}
 
           {/* Tabs */}
           <div className="flex flex-wrap gap-1.5 px-4 py-2.5 border-b border-border shrink-0">
