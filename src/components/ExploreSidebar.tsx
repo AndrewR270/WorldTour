@@ -19,7 +19,7 @@ interface ExploreSidebarProps {
   isOpen: boolean;
   hidden?: boolean;
   onToggle: () => void;
-  onSelect: (location: ExploreLocation) => void;
+  onSelect: (location: ExploreLocation, searchQuery: string) => void;
   onResults: (locations: ExploreLocation[]) => void;
 }
 
