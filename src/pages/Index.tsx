@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from "react";
-import { Compass, Search, Loader2, Dices, HelpCircle, X } from "lucide-react";
+import { Compass, Search, Loader2, Dices, HelpCircle, X, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import MapView from "@/components/MapView";
 import InfoPanel from "@/components/InfoPanel";
