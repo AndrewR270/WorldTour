@@ -58,6 +58,26 @@ const Index = () => {
   const exploreRef = useRef<ExploreSidebarHandle>(null);
   const mapRef = useRef<MapViewHandle>(null);
 
+  const fetchTopicRundown = useCallback(async (topic: string) => {
+    setTopicPanelOpen(true);
+    setTopicLoading(true);
+    setTopicName(topic);
+    setTopicContent(null);
+    try {
+      const { data, error } = await supabase.functions.invoke("topic-rundown", {
+        body: { topic },
+      });
+      if (error) throw error;
+      setTopicContent(data.content);
+    } catch (err: any) {
+      console.error(err);
+      toast.error("Failed to fetch topic info");
+      setTopicContent("Unable to retrieve information for this topic.");
+    } finally {
+      setTopicLoading(false);
+    }
+  }, []);
+
   const { history, addEntry, clearHistory, removeEntry } = useSearchHistory();
 
   const handleLocationClick = useCallback(async (clickLat: number, clickLng: number, searchQuery?: string) => {
