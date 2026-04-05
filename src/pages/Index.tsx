@@ -381,6 +381,15 @@ const Index = () => {
         )}
       </AnimatePresence>
 
+      <TopicPanel
+        isOpen={topicPanelOpen}
+        onClose={() => setTopicPanelOpen(false)}
+        topicName={topicName}
+        content={topicContent}
+        isLoading={topicLoading}
+        hasLocationAbove={panelOpen}
+      />
+
       <InfoPanel
         isOpen={panelOpen}
         onClose={() => setPanelOpen(false)}
