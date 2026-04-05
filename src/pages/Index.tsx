@@ -49,6 +49,7 @@ const Index = () => {
   const [searchFocused, setSearchFocused] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const exploreRef = useRef<ExploreSidebarHandle>(null);
+  const mapRef = useRef<MapViewHandle>(null);
 
   const { history, addEntry, clearHistory, removeEntry } = useSearchHistory();
 
