@@ -115,7 +115,7 @@ function RichContent({ text }: { text: string }) {
 }
 
 const InfoPanel = ({
-  isOpen, onClose, locationName, content, isLoading, lat, lng,
+  isOpen, onClose, locationName, content, isLoading, lat, lng, exploreContext,
 }: InfoPanelProps) => {
   const [activeTab, setActiveTab] = useState("history");
 
