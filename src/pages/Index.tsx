@@ -62,6 +62,7 @@ const Index = () => {
     setContent(null);
     setImageUrl(null);
     setLocationName(null);
+    setExploreContext(null);
 
     const fallbackLocationName = `${Math.abs(clickLat).toFixed(2)}°${clickLat >= 0 ? "N" : "S"}, ${Math.abs(clickLng).toFixed(2)}°${clickLng >= 0 ? "E" : "W"}`;
 
