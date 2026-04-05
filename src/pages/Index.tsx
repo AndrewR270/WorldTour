@@ -3,7 +3,7 @@ import { Compass, Search } from "lucide-react";
 import MapView from "@/components/MapView";
 import InfoPanel from "@/components/InfoPanel";
 import SearchHistorySidebar from "@/components/SearchHistorySidebar";
-import ExploreSidebar from "@/components/ExploreSidebar";
+import ExploreSidebar, { ExploreSidebarHandle } from "@/components/ExploreSidebar";
 import { ExploreLocation } from "@/components/ExploreSidebar";
 import { useSearchHistory } from "@/hooks/use-search-history";
 import { supabase } from "@/integrations/supabase/client";
