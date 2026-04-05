@@ -126,19 +126,21 @@ const ExploreSidebar = forwardRef<ExploreSidebarHandle, ExploreSidebarProps>(({ 
   return (
     <>
       {/* Bookmark tab toggle */}
-      <button
-        onClick={onToggle}
-        className="bookmark-tab fixed z-[1001] flex items-center justify-center px-1.5 py-4 rounded-r-md bg-bookmark-red text-primary-foreground font-display text-xs tracking-wider hover:brightness-110 transition-all"
-        style={{
-          top: "220px",
-          left: isOpen ? "320px" : "0px",
-        }}
-      >
-        <span className="flex items-center gap-1">
-          <Compass className="w-3.5 h-3.5 rotate-90" />
-          <span>Explore</span>
-        </span>
-      </button>
+      {!hidden && (
+        <button
+          onClick={onToggle}
+          className="bookmark-tab fixed z-[1001] flex items-center justify-center px-1.5 py-4 rounded-r-md bg-bookmark-red text-primary-foreground font-display text-xs tracking-wider hover:brightness-110 transition-all"
+          style={{
+            top: "220px",
+            left: isOpen ? "320px" : "0px",
+          }}
+        >
+          <span className="flex items-center gap-1">
+            <Compass className="w-3.5 h-3.5 rotate-90" />
+            <span>Explore</span>
+          </span>
+        </button>
+      )}
 
       {/* Sidebar panel */}
       <AnimatePresence>
