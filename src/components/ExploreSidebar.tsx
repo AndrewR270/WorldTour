@@ -22,6 +22,7 @@ const ExploreSidebar = ({ isOpen, onToggle, onSelect, onResults }: ExploreSideba
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<ExploreLocation[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const handleSearch = async () => {
     const trimmed = query.trim();
@@ -143,25 +144,31 @@ const ExploreSidebar = ({ isOpen, onToggle, onSelect, onResults }: ExploreSideba
                 </div>
               ) : (
                 <div className="py-2">
-                  {results.map((loc, i) => (
-                    <div
-                      key={`${loc.name}-${i}`}
-                      className="group flex items-start gap-3 px-4 py-3 hover:bg-muted/50 cursor-pointer transition-colors"
-                      onClick={() => onSelect(loc)}
-                    >
-                      <div className="w-7 h-7 rounded-lg bg-red-500/10 flex items-center justify-center shrink-0 mt-0.5">
-                        <MapPin className="w-3.5 h-3.5 text-red-500" />
+                  {results.map((loc, i) => {
+                    const isExpanded = expandedIndex === i;
+                    return (
+                      <div
+                        key={`${loc.name}-${i}`}
+                        className={`group flex items-start gap-3 px-4 py-3 cursor-pointer transition-colors ${isExpanded ? "bg-muted/70" : "hover:bg-muted/50"}`}
+                        onClick={() => {
+                          setExpandedIndex(isExpanded ? null : i);
+                          onSelect(loc);
+                        }}
+                      >
+                        <div className="w-7 h-7 rounded-lg bg-destructive/10 flex items-center justify-center shrink-0 mt-0.5">
+                          <MapPin className="w-3.5 h-3.5 text-destructive" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-body font-medium text-foreground truncate">
+                            {loc.name}
+                          </p>
+                          <p className={`text-[11px] text-muted-foreground font-body mt-0.5 ${isExpanded ? "" : "line-clamp-2"}`}>
+                            {loc.description}
+                          </p>
+                        </div>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-body font-medium text-foreground truncate">
-                          {loc.name}
-                        </p>
-                        <p className="text-[11px] text-muted-foreground font-body mt-0.5 line-clamp-2">
-                          {loc.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>
