@@ -130,7 +130,7 @@ const Index = () => {
       {/* Explore sidebar */}
       <ExploreSidebar
         isOpen={exploreOpen}
-        onToggle={() => setExploreOpen((o) => !o)}
+        onToggle={() => { setExploreOpen((o) => !o); setSidebarOpen(false); }}
         onSelect={handleExploreSelect}
         onResults={handleExploreResults}
       />
