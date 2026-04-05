@@ -223,6 +223,7 @@ const Index = () => {
               setSidebarOpen(false);
               if (!exploreOpen) setExploreOpen(true);
               exploreRef.current?.setQueryAndSearch(q);
+              setLastExploreQuery(q);
               setTopSearchQuery("");
             }}
           >
