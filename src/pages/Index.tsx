@@ -51,6 +51,10 @@ const Index = () => {
   const [searchFocused, setSearchFocused] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [lastExploreQuery, setLastExploreQuery] = useState("");
+  const [topicPanelOpen, setTopicPanelOpen] = useState(false);
+  const [topicName, setTopicName] = useState<string | null>(null);
+  const [topicContent, setTopicContent] = useState<string | null>(null);
+  const [topicLoading, setTopicLoading] = useState(false);
   const exploreRef = useRef<ExploreSidebarHandle>(null);
   const mapRef = useRef<MapViewHandle>(null);
 
