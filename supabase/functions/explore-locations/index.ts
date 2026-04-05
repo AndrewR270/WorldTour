@@ -27,7 +27,7 @@ serve(async (req) => {
 
     const prompt = `Given the query "${query}", return a JSON array of up to 10 real-world locations that are most relevant or associated with it. Each object must have: "name" (location name with country), "lat" (latitude number), "lng" (longitude number), "description" (one short sentence about why it's relevant). Return ONLY valid JSON array, no markdown, no explanation.`;
 
-    const res = await fetch("https://ai.lovable.dev/api/v1/chat/completions", {
+    const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
