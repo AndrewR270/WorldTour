@@ -177,7 +177,7 @@ const ExploreSidebar = forwardRef<ExploreSidebarHandle, ExploreSidebarProps>(({ 
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Ancient ruins, hidden temples..."
+                  placeholder="Enter a place, person, event, etc..."
                   className="w-full h-9 pl-3 pr-9 rounded bg-secondary/50 border border-border text-sm font-body text-foreground placeholder:text-muted-foreground/70 placeholder:italic focus:outline-none focus:ring-2 focus:ring-primary/30"
                 />
                 <button
