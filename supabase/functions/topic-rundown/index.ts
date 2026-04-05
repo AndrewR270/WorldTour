@@ -36,10 +36,14 @@ What's happening now? Recent developments, current state.
 ## Fun Facts
 Surprising, lesser-known, or entertaining tidbits.
 
+## Sources
+Provide exactly 3 real, relevant source URLs (Wikipedia, news outlets, official sites, etc.) with a short label for each. Format as:
+- [Label](URL)
+
 RULES:
 - **Bold** important names, dates, places
 - Bullet points (- ) for lists
-- 30-60 words per section
+- 80-150 words per section
 - Vivid, conversational, like a knowledgeable expert
 - If the topic is a place, focus on what makes it unique beyond geography`;
 

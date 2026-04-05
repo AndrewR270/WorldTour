@@ -75,10 +75,14 @@ Recent notable events or developments (last few years).
 ## Issues & Challenges
 Current challenges: conflicts, environment, politics, humanitarian. Be factual, balanced.
 
+## Sources
+Provide exactly 3 real, relevant source URLs (Wikipedia, news outlets, travel sites, government sites, etc.) with a short label for each. Format as:
+- [Label](URL)
+
 RULES:
 - **Bold** important names, dishes, places, dates
 - Bullet points (- ) for lists
-- 40-80 words per section
+- 80-150 words per section
 - Vivid, conversational, like a knowledgeable local guide
 - CRITICAL: If the given location is remote, uninhabited, in the ocean, a desert, or otherwise lacks cultural significance, you MUST identify the nearest notable town or city and write about THAT place instead. Start your response with a single line: "Nearest town: [Town Name, Country]" so we know which place you chose. Only include this line if you had to redirect to a different location.`;
 

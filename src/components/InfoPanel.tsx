@@ -1,6 +1,6 @@
 import {
   X, MapPin, Loader2, Utensils, Landmark, Music,
-  BookOpen, Newspaper, AlertTriangle, ChevronRight,
+  BookOpen, Newspaper, AlertTriangle, ChevronRight, ExternalLink,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo, Fragment } from "react";
@@ -15,6 +15,7 @@ interface InfoPanelProps {
   lng: number | null;
   exploreContext: string | null;
   hasTopicBelow?: boolean;
+  onBoldClick?: (term: string) => void;
 }
 
 const tabs = [
@@ -26,8 +27,14 @@ const tabs = [
   { key: "issues", icon: AlertTriangle, label: "Issues" },
 ];
 
-function parseSections(content: string): Record<string, string> {
+interface ParsedContent {
+  sections: Record<string, string>;
+  sources: { label: string; url: string }[];
+}
+
+function parseContent(content: string): ParsedContent {
   const sections: Record<string, string> = {};
+  const sources: { label: string; url: string }[] = [];
   const sectionMap: Record<string, string> = {
     "historical significance": "history", "history": "history",
     "food & cuisine": "food", "food": "food", "cuisine": "food",
@@ -36,6 +43,7 @@ function parseSections(content: string): Record<string, string> {
     "current news": "news", "news": "news", "recent developments": "news",
     "current issues": "issues", "issues & challenges": "issues",
     "issues": "issues", "challenges": "issues", "conflicts": "issues",
+    "sources": "sources",
   };
 
   let currentKey = "history";
@@ -45,7 +53,14 @@ function parseSections(content: string): Record<string, string> {
     const headerMatch = line.match(/^#+\s*\**\s*(.+?)\s*\**\s*$/);
     if (headerMatch) {
       if (currentLines.length) {
-        sections[currentKey] = (sections[currentKey] || "") + currentLines.join("\n").trim() + "\n";
+        if (currentKey === "sources") {
+          for (const l of currentLines) {
+            const linkMatch = l.match(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/);
+            if (linkMatch) sources.push({ label: linkMatch[1], url: linkMatch[2] });
+          }
+        } else {
+          sections[currentKey] = (sections[currentKey] || "") + currentLines.join("\n").trim() + "\n";
+        }
       }
       const title = headerMatch[1].toLowerCase().replace(/[*#]/g, "").trim();
       currentKey =
@@ -58,18 +73,31 @@ function parseSections(content: string): Record<string, string> {
     }
   }
   if (currentLines.length) {
-    sections[currentKey] = (sections[currentKey] || "") + currentLines.join("\n").trim();
+    if (currentKey === "sources") {
+      for (const l of currentLines) {
+        const linkMatch = l.match(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/);
+        if (linkMatch) sources.push({ label: linkMatch[1], url: linkMatch[2] });
+      }
+    } else {
+      sections[currentKey] = (sections[currentKey] || "") + currentLines.join("\n").trim();
+    }
   }
-  return sections;
+  return { sections, sources: sources.slice(0, 3) };
 }
 
-function RichLine({ text }: { text: string }) {
+function RichLine({ text, onBoldClick }: { text: string; onBoldClick?: (term: string) => void }) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return (
     <>
       {parts.map((part, i) =>
         part.startsWith("**") && part.endsWith("**") ? (
-          <strong key={i} className="text-foreground font-bold">{part.slice(2, -2)}</strong>
+          <strong
+            key={i}
+            className={`text-foreground font-bold ${onBoldClick ? "text-primary underline decoration-primary/40 cursor-pointer hover:decoration-primary transition-colors" : ""}`}
+            onClick={onBoldClick ? (e) => { e.stopPropagation(); onBoldClick(part.slice(2, -2)); } : undefined}
+          >
+            {part.slice(2, -2)}
+          </strong>
         ) : (
           <Fragment key={i}>{part}</Fragment>
         )
@@ -78,7 +106,7 @@ function RichLine({ text }: { text: string }) {
   );
 }
 
-function RichContent({ text }: { text: string }) {
+function RichContent({ text, onBoldClick }: { text: string; onBoldClick?: (term: string) => void }) {
   const lines = text.split("\n").filter((l) => l.trim());
   const elements: JSX.Element[] = [];
   let bulletBuffer: string[] = [];
@@ -90,7 +118,7 @@ function RichContent({ text }: { text: string }) {
         {bulletBuffer.map((b, i) => (
           <li key={i} className="flex items-start gap-2 text-sm text-foreground/85 leading-relaxed font-reading">
             <ChevronRight className="w-3.5 h-3.5 mt-1 shrink-0 text-primary/60" />
-            <span><RichLine text={b} /></span>
+            <span><RichLine text={b} onBoldClick={onBoldClick} /></span>
           </li>
         ))}
       </ul>
@@ -106,7 +134,7 @@ function RichContent({ text }: { text: string }) {
       flushBullets();
       elements.push(
         <p key={`p-${elements.length}`} className="text-sm text-foreground/85 leading-relaxed font-reading">
-          <RichLine text={line} />
+          <RichLine text={line} onBoldClick={onBoldClick} />
         </p>
       );
     }
@@ -115,13 +143,36 @@ function RichContent({ text }: { text: string }) {
   return <div className="space-y-2.5">{elements}</div>;
 }
 
+function SourceLinks({ sources }: { sources: { label: string; url: string }[] }) {
+  if (!sources.length) return null;
+  return (
+    <div className="px-5 py-3 border-t border-border shrink-0">
+      <p className="text-xs text-muted-foreground font-display mb-1.5">Sources</p>
+      <div className="flex flex-col gap-1">
+        {sources.map((s, i) => (
+          <a
+            key={i}
+            href={s.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs text-primary hover:text-primary/80 hover:underline transition-colors font-body truncate"
+          >
+            <ExternalLink className="w-3 h-3 shrink-0" />
+            {s.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const InfoPanel = ({
-  isOpen, onClose, locationName, content, isLoading, lat, lng, exploreContext, hasTopicBelow,
+  isOpen, onClose, locationName, content, isLoading, lat, lng, exploreContext, hasTopicBelow, onBoldClick,
 }: InfoPanelProps) => {
   const [activeTab, setActiveTab] = useState("history");
 
-  const sections = useMemo(() => (content ? parseSections(content) : {}), [content]);
-  const activeContent = sections[activeTab];
+  const parsed = useMemo(() => (content ? parseContent(content) : { sections: {}, sources: [] }), [content]);
+  const activeContent = parsed.sections[activeTab];
   const activeTabMeta = tabs.find((t) => t.key === activeTab)!;
 
   return (
@@ -211,7 +262,7 @@ const InfoPanel = ({
                 transition={{ duration: 0.2 }}
                 className="p-5"
               >
-                <RichContent text={activeContent} />
+                <RichContent text={activeContent} onBoldClick={onBoldClick} />
               </motion.div>
             ) : content ? (
               <div className="flex flex-col items-center justify-center h-full gap-2 text-muted-foreground text-sm px-6">
@@ -227,10 +278,13 @@ const InfoPanel = ({
             )}
           </div>
 
+          {/* Sources */}
+          {!isLoading && <SourceLinks sources={parsed.sources} />}
+
           {/* Footer */}
           <div className="px-5 py-2 border-t border-border shrink-0">
             <p className="text-xs text-muted-foreground font-body italic text-center">
-              Powered by AI · Tap the map to explore more
+              Powered by Gemini · Tap the map to explore more
             </p>
           </div>
         </motion.div>
