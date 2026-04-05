@@ -3,6 +3,7 @@ import { Compass, Search, Loader2, Dices, HelpCircle, X, Globe } from "lucide-re
 import { motion, AnimatePresence } from "framer-motion";
 import MapView, { MapViewHandle } from "@/components/MapView";
 import InfoPanel from "@/components/InfoPanel";
+import TopicPanel from "@/components/TopicPanel";
 import SearchHistorySidebar from "@/components/SearchHistorySidebar";
 import ExploreSidebar, { ExploreSidebarHandle } from "@/components/ExploreSidebar";
 import { ExploreLocation } from "@/components/ExploreSidebar";
@@ -50,8 +51,32 @@ const Index = () => {
   const [searchFocused, setSearchFocused] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [lastExploreQuery, setLastExploreQuery] = useState("");
+  const [topicPanelOpen, setTopicPanelOpen] = useState(false);
+  const [topicName, setTopicName] = useState<string | null>(null);
+  const [topicContent, setTopicContent] = useState<string | null>(null);
+  const [topicLoading, setTopicLoading] = useState(false);
   const exploreRef = useRef<ExploreSidebarHandle>(null);
   const mapRef = useRef<MapViewHandle>(null);
+
+  const fetchTopicRundown = useCallback(async (topic: string) => {
+    setTopicPanelOpen(true);
+    setTopicLoading(true);
+    setTopicName(topic);
+    setTopicContent(null);
+    try {
+      const { data, error } = await supabase.functions.invoke("topic-rundown", {
+        body: { topic },
+      });
+      if (error) throw error;
+      setTopicContent(data.content);
+    } catch (err: any) {
+      console.error(err);
+      toast.error("Failed to fetch topic info");
+      setTopicContent("Unable to retrieve information for this topic.");
+    } finally {
+      setTopicLoading(false);
+    }
+  }, []);
 
   const { history, addEntry, clearHistory, removeEntry } = useSearchHistory();
 
@@ -64,6 +89,11 @@ const Index = () => {
     setImageUrl(null);
     setLocationName(null);
     setExploreContext(null);
+
+    // If clicking directly on map (not from explore), close topic panel
+    if (!searchQuery) {
+      setTopicPanelOpen(false);
+    }
 
     const fallbackLocationName = `${Math.abs(clickLat).toFixed(2)}°${clickLat >= 0 ? "N" : "S"}, ${Math.abs(clickLng).toFixed(2)}°${clickLng >= 0 ? "E" : "W"}`;
 
@@ -190,6 +220,10 @@ const Index = () => {
         onToggle={() => { setExploreOpen((o) => !o); setSidebarOpen(false); }}
         onSelect={handleExploreSelect}
         onResults={handleExploreResults}
+        onSearch={(q) => {
+          setPanelOpen(false);
+          fetchTopicRundown(q);
+        }}
       />
 
       {/* Logo */}
@@ -221,10 +255,12 @@ const Index = () => {
             const q = topSearchQuery.trim();
             if (!q) return;
             setSidebarOpen(false);
+            setPanelOpen(false);
             if (!exploreOpen) setExploreOpen(true);
             exploreRef.current?.setQueryAndSearch(q);
             setLastExploreQuery(q);
             setTopSearchQuery("");
+            fetchTopicRundown(q);
           }}
         >
           <div className="relative">
@@ -345,6 +381,15 @@ const Index = () => {
         )}
       </AnimatePresence>
 
+      <TopicPanel
+        isOpen={topicPanelOpen}
+        onClose={() => setTopicPanelOpen(false)}
+        topicName={topicName}
+        content={topicContent}
+        isLoading={topicLoading}
+        hasLocationAbove={panelOpen}
+      />
+
       <InfoPanel
         isOpen={panelOpen}
         onClose={() => setPanelOpen(false)}
@@ -354,6 +399,7 @@ const Index = () => {
         lat={lat}
         lng={lng}
         exploreContext={exploreContext}
+        hasTopicBelow={topicPanelOpen}
       />
     </div>
   );

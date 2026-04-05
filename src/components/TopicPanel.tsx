@@ -1,44 +1,40 @@
 import {
-  X, MapPin, Loader2, Utensils, Landmark, Music,
-  BookOpen, Newspaper, AlertTriangle, ChevronRight,
+  X, Loader2, BookOpen, Users, Trophy, Sparkles, Radio, Lightbulb, ChevronRight,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo, Fragment } from "react";
 
-interface InfoPanelProps {
+interface TopicPanelProps {
   isOpen: boolean;
   onClose: () => void;
-  locationName: string | null;
+  topicName: string | null;
   content: string | null;
   isLoading: boolean;
-  lat: number | null;
-  lng: number | null;
-  exploreContext: string | null;
-  hasTopicBelow?: boolean;
+  /** When true, panel shifts down to make room for InfoPanel on top */
+  hasLocationAbove: boolean;
 }
 
 const tabs = [
-  { key: "history", icon: Landmark, label: "History" },
-  { key: "food", icon: Utensils, label: "Food" },
-  { key: "culture", icon: Music, label: "Culture" },
-  { key: "stories", icon: BookOpen, label: "Stories" },
-  { key: "news", icon: Newspaper, label: "News" },
-  { key: "issues", icon: AlertTriangle, label: "Issues" },
+  { key: "overview", icon: BookOpen, label: "Overview" },
+  { key: "figures", icon: Users, label: "Key Figures" },
+  { key: "achievements", icon: Trophy, label: "Achievements" },
+  { key: "impact", icon: Sparkles, label: "Impact" },
+  { key: "status", icon: Radio, label: "Current" },
+  { key: "funfacts", icon: Lightbulb, label: "Fun Facts" },
 ];
 
 function parseSections(content: string): Record<string, string> {
   const sections: Record<string, string> = {};
   const sectionMap: Record<string, string> = {
-    "historical significance": "history", "history": "history",
-    "food & cuisine": "food", "food": "food", "cuisine": "food",
-    "culture & arts": "culture", "culture": "culture", "arts": "culture",
-    "hidden stories": "stories", "stories": "stories", "legends": "stories",
-    "current news": "news", "news": "news", "recent developments": "news",
-    "current issues": "issues", "issues & challenges": "issues",
-    "issues": "issues", "challenges": "issues", "conflicts": "issues",
+    "overview": "overview",
+    "key figures": "figures", "figures": "figures",
+    "notable achievements": "achievements", "achievements": "achievements",
+    "cultural impact": "impact", "impact": "impact",
+    "current status": "status", "status": "status", "current": "status",
+    "fun facts": "funfacts", "funfacts": "funfacts", "trivia": "funfacts",
   };
 
-  let currentKey = "history";
+  let currentKey = "overview";
   let currentLines: string[] = [];
 
   for (const line of content.split("\n")) {
@@ -115,10 +111,10 @@ function RichContent({ text }: { text: string }) {
   return <div className="space-y-2.5">{elements}</div>;
 }
 
-const InfoPanel = ({
-  isOpen, onClose, locationName, content, isLoading, lat, lng, exploreContext, hasTopicBelow,
-}: InfoPanelProps) => {
-  const [activeTab, setActiveTab] = useState("history");
+const TopicPanel = ({
+  isOpen, onClose, topicName, content, isLoading, hasLocationAbove,
+}: TopicPanelProps) => {
+  const [activeTab, setActiveTab] = useState("overview");
 
   const sections = useMemo(() => (content ? parseSections(content) : {}), [content]);
   const activeContent = sections[activeTab];
@@ -132,24 +128,27 @@ const InfoPanel = ({
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: "100%", opacity: 0 }}
           transition={{ type: "spring", damping: 28, stiffness: 220 }}
-          className={`fixed top-20 right-0 w-full max-w-[var(--panel-width)] bg-card journal-texture border-l-2 border-t-2 border-b-2 border-border rounded-l-xl z-[1000] flex flex-col ${hasTopicBelow ? "bottom-[50%]" : "bottom-10"}`}
-          style={{ boxShadow: "-4px 0 15px hsl(25 30% 20% / 0.15)" }}
+          className="fixed right-0 bottom-10 w-full max-w-[var(--panel-width)] bg-card journal-texture border-l-2 border-t-2 border-b-2 border-border rounded-l-xl z-[999] flex flex-col"
+          style={{
+            top: hasLocationAbove ? "50%" : "80px",
+            boxShadow: "-4px 0 15px hsl(25 30% 20% / 0.15)",
+          }}
         >
           {/* Header */}
           <div className="shrink-0 px-5 pt-4 pb-3 border-b border-border">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 min-w-0">
-                <MapPin className="w-4 h-4 text-primary shrink-0" />
+                <BookOpen className="w-4 h-4 text-primary shrink-0" />
                 <div className="min-w-0">
                   <h2 className="font-display text-lg font-bold text-foreground leading-tight truncate">
-                    {locationName || (
+                    {topicName || (
                       <span className="flex items-center gap-2">
-                        <Loader2 className="w-4 h-4 animate-spin" /> Finding location…
+                        <Loader2 className="w-4 h-4 animate-spin" /> Researching topic…
                       </span>
                     )}
                   </h2>
-                  <span className="text-xs text-muted-foreground font-body">
-                    {lat?.toFixed(4)}, {lng?.toFixed(4)}
+                  <span className="text-xs text-muted-foreground font-body italic">
+                    Topic Overview
                   </span>
                 </div>
               </div>
@@ -161,16 +160,6 @@ const InfoPanel = ({
               </button>
             </div>
           </div>
-
-          {/* Explore context */}
-          {exploreContext && (
-            <div className="px-5 py-3 border-b border-border shrink-0 bg-primary/5">
-              <p className="text-sm text-foreground/90 font-body leading-relaxed">
-                <strong className="text-primary font-display not-italic">Connection: </strong>
-                <span className="italic">{exploreContext}</span>
-              </p>
-            </div>
-          )}
 
           {/* Tabs */}
           <div className="flex flex-wrap gap-1.5 px-4 py-2.5 border-b border-border shrink-0">
@@ -200,8 +189,8 @@ const InfoPanel = ({
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                   <Loader2 className="w-6 h-6 animate-spin text-primary" />
                 </div>
-                <p className="text-foreground font-display text-sm">Consulting the archives…</p>
-                <p className="text-muted-foreground font-body text-xs italic">Gathering history, culture & stories</p>
+                <p className="text-foreground font-display text-sm">Researching topic…</p>
+                <p className="text-muted-foreground font-body text-xs italic">Gathering facts & stories</p>
               </div>
             ) : activeContent ? (
               <motion.div
@@ -217,12 +206,12 @@ const InfoPanel = ({
               <div className="flex flex-col items-center justify-center h-full gap-2 text-muted-foreground text-sm px-6">
                 <activeTabMeta.icon className="w-7 h-7 text-muted-foreground/30" />
                 <p className="text-center font-body italic">
-                  No {activeTabMeta.label.toLowerCase()} entries found for this destination.
+                  No {activeTabMeta.label.toLowerCase()} info found for this topic.
                 </p>
               </div>
             ) : (
               <div className="flex items-center justify-center h-full text-muted-foreground text-sm font-body italic">
-                Click anywhere on the map to begin exploring
+                Search to learn about any topic
               </div>
             )}
           </div>
@@ -230,7 +219,7 @@ const InfoPanel = ({
           {/* Footer */}
           <div className="px-5 py-2 border-t border-border shrink-0">
             <p className="text-xs text-muted-foreground font-body italic text-center">
-              Powered by AI · Tap the map to explore more
+              Powered by AI · Search to explore topics
             </p>
           </div>
         </motion.div>
@@ -239,4 +228,4 @@ const InfoPanel = ({
   );
 };
 
-export default InfoPanel;
+export default TopicPanel;
