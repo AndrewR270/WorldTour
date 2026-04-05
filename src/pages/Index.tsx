@@ -3,6 +3,7 @@ import { Compass, Search, Loader2, Dices, HelpCircle, X, Globe } from "lucide-re
 import { motion, AnimatePresence } from "framer-motion";
 import MapView, { MapViewHandle } from "@/components/MapView";
 import InfoPanel from "@/components/InfoPanel";
+import TopicPanel from "@/components/TopicPanel";
 import SearchHistorySidebar from "@/components/SearchHistorySidebar";
 import ExploreSidebar, { ExploreSidebarHandle } from "@/components/ExploreSidebar";
 import { ExploreLocation } from "@/components/ExploreSidebar";
