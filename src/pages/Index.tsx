@@ -143,9 +143,9 @@ const Index = () => {
     setSidebarOpen(false);
   }, [handleLocationClick]);
 
-  const handleExploreSelect = useCallback((location: ExploreLocation) => {
-    handleLocationClick(location.lat, location.lng, lastExploreQuery || undefined);
-  }, [handleLocationClick, lastExploreQuery]);
+  const handleExploreSelect = useCallback((location: ExploreLocation, searchQuery: string) => {
+    handleLocationClick(location.lat, location.lng, searchQuery || undefined);
+  }, [handleLocationClick]);
 
   const handleExploreResults = useCallback((locations: ExploreLocation[]) => {
     setExploreMarkers(locations);

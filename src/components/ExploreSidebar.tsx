@@ -220,7 +220,7 @@ const ExploreSidebar = forwardRef<ExploreSidebarHandle, ExploreSidebarProps>(({ 
                         className={`group flex items-start gap-3 px-4 py-3 cursor-pointer transition-colors border-b border-border/40 last:border-b-0 ${isExpanded ? "bg-secondary/60" : "hover:bg-secondary/30"}`}
                         onClick={() => {
                           setExpandedIndex(isExpanded ? null : i);
-                          onSelect(loc);
+                          onSelect(loc, lastQuery);
                         }}
                       >
                         <div className="w-6 h-6 rounded-full bg-destructive/15 flex items-center justify-center shrink-0 mt-0.5">
