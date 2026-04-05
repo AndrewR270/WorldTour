@@ -17,12 +17,13 @@ export interface ExploreSidebarHandle {
 
 interface ExploreSidebarProps {
   isOpen: boolean;
+  hidden?: boolean;
   onToggle: () => void;
   onSelect: (location: ExploreLocation) => void;
   onResults: (locations: ExploreLocation[]) => void;
 }
 
-const ExploreSidebar = forwardRef<ExploreSidebarHandle, ExploreSidebarProps>(({ isOpen, onToggle, onSelect, onResults }, ref) => {
+const ExploreSidebar = forwardRef<ExploreSidebarHandle, ExploreSidebarProps>(({ isOpen, hidden, onToggle, onSelect, onResults }, ref) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<ExploreLocation[]>([]);
   const [isLoading, setIsLoading] = useState(false);
