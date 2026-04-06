@@ -26,7 +26,7 @@ We used the following tools, frameworks, and GenAIs to build the project:
 - OpenStreetMaps API
 - Leaflet.js
 - Vite
-- React.js a
+- React.js
 - Node Package Manager
 - Render
 - GitHub
