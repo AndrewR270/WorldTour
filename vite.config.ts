@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => ({
     hmr: {
       overlay: false,
     },
-    allowedHosts: ["localhost", "worldtour-okkj.onrender.com"],
+    allowedHosts: ["localhost", "worldtour-okkj.onrender.com, https://www.exploreworldtour.tech/"],
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
