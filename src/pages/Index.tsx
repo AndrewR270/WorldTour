@@ -71,8 +71,8 @@ const Index = () => {
       setTopicContent(data.content);
     } catch (err: any) {
       console.error(err);
-      toast.error("Failed to fetch topic info");
-      setTopicContent("Unable to retrieve information for this topic.");
+      toast.error("Failed to fetch topic info.");
+      setTopicContent("Work in progress! Topic information retrieval will be running again soon. Sorry for the inconvenience.");
     } finally {
       setTopicLoading(false);
     }
@@ -162,7 +162,7 @@ const Index = () => {
       console.error(err);
       toast.error("Failed to fetch info about this location");
       setLocationName(`Remote area near ${fallbackLocationName}`);
-      setContent("Unable to retrieve cultural information for this location. Please try again.");
+      setContent("Work in progress! Cultural information retrieval will be running again soon. Sorry for the inconvenience.");
     } finally {
       setIsLoading(false);
     }

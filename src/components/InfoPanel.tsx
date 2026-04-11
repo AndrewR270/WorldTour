@@ -268,7 +268,7 @@ const InfoPanel = ({
               <div className="flex flex-col items-center justify-center h-full gap-2 text-muted-foreground text-sm px-6">
                 <activeTabMeta.icon className="w-7 h-7 text-muted-foreground/30" />
                 <p className="text-center font-body italic">
-                  No {activeTabMeta.label.toLowerCase()} entries found for this destination.
+                  Work in progress! No {activeTabMeta.label.toLowerCase()} entries found for this destination.
                 </p>
               </div>
             ) : (
