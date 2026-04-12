@@ -49,7 +49,7 @@ This was our second hackathon, and the **first time using AI to generate code.**
 
 ## Next Steps
 
-We want to make it like a visual alternative to Wikipedia. We would like to create user profiles, where search results can be tailored to the individual as it learns about them. Further, we want to implement more features that can aid in research, such as search parameters like recency, response length/detail, and source control. We also have some work to do with the UI, including implementing images and audio. 
+We want to make it more of a visual alternative to Wikipedia. We would like to create user profiles, where search results can be tailored to the individual as it learns about them. Further, we want to implement more features that can aid in research, such as search parameters like recency, response length/detail, and source control. We also have some work to do with the UI, including implementing images and audio. 
 
 ## Credits
 
