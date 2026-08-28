@@ -2,6 +2,14 @@
 
 **Explore** and **learn** about the world through your own unique lens. **Journey** to anywhere on the map, or **discover** places associated with any topic you can dream of. *The story of our world, visualized.*
 
+# Note!
+
+This repository has been completely refactored for maintainability, stability, and proper API integration into **WorldTour-AI** which can be found here: https://github.com/AndrewR270/WorldTour-AI
+
+The newest version is now being hosted on Vercel: https://world-tour-ai.vercel.app/
+
+This repo and the Render link are kept for historical and referential purposes - they are not being updated as they rely on an older architectural system involving Lovable, a rudimentary Supabase, and a hosting service which are not aligned with our current goals and have thus been remedied in the newer project.
+
 ## Inspiration
 
 Learning about world history and culture has always been one of our favorite pastimes - geography being the other. **With WorldTour, we leverage AI** to combine the two - **making history visible** on the map through relevant locations, **providing cultural enrichment** about any place in the world through dynamic prompts, and **raising awareness** about news and social issues across the world. WorldTour connects any interest a user may have to geography, history, and culture. In short, **WorldTour is the story of humanity on the map** - serving as anything from an astounding research tool to a fun way to pass the time.
